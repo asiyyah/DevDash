@@ -11,6 +11,8 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let active = true;
+
     if (!url) {
       setData(null);
       setLoading(false);
@@ -21,12 +23,17 @@ const useFetch = (url) => {
     const abortController = new AbortController();
 
     const fetchData = async () => {
+      // Small optimization: don't set loading if we're already unmounted
+      if (!active) return;
+      
       setLoading(true);
       setError(null);
 
       try {
         const response = await fetch(url, { signal: abortController.signal });
         
+        if (!active) return;
+
         if (!response.ok) {
           if (response.status === 403) {
             throw new Error('API rate limit exceeded. Please try again later.');
@@ -43,19 +50,25 @@ const useFetch = (url) => {
         }
 
         const result = await response.json();
-        setData(result);
+        
+        if (active) {
+          setData(result);
+        }
       } catch (err) {
-        if (err.name !== 'AbortError') {
+        if (err.name !== 'AbortError' && active) {
           setError(err.message || 'Something went wrong');
         }
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     };
 
     fetchData();
 
     return () => {
+      active = false;
       abortController.abort();
     };
   }, [url]);
