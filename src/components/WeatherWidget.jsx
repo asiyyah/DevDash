@@ -2,7 +2,7 @@ import React from 'react';
 import { Cloud, MapPin, Wind, Droplets } from 'lucide-react';
 import useFetch from '../hooks/useFetch';
 
-const WeatherWidget = ({ city = 'Kuje, Nigeria' }) => {
+const WeatherWidget = ({ city = 'Abuja, Nigeria' }) => {
   const encodedCity = encodeURIComponent(city);
   const { data: weather, loading, error } = useFetch(`https://wttr.in/${encodedCity}?format=j1`);
 

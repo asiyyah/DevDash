@@ -28,7 +28,18 @@ const useFetch = (url) => {
         const response = await fetch(url, { signal: abortController.signal });
         
         if (!response.ok) {
+          if (response.status === 403) {
+            throw new Error('API rate limit exceeded. Please try again later.');
+          }
+          if (response.status === 404) {
+            throw new Error('Resource not found.');
+          }
           throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Received non-JSON response from server.');
         }
 
         const result = await response.json();

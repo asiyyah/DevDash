@@ -298,6 +298,15 @@ body {
   padding-left: 3rem;
 }
 
+.validation-error {
+  color: var(--accent-rose);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  position: absolute;
+  left: 1rem;
+}
+
 /* User Profile */
 .user-profile-card {
   margin-bottom: 2rem;
@@ -462,14 +471,149 @@ body {
   gap: 2rem;
 }
 
-.task-input-form {
+.tasks-header {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .task-filters {
   display: flex;
   gap: 0.75rem;
+  column-gap: 0.75rem;
+}
+
+.add-task-btn {
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+}
+
+/* Modal Styling */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.close-btn:hover {
+  color: var(--accent-rose);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.date-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--bg-accent);
+  border: 1px solid var(--border-color);
+  padding: 0 1rem;
+  border-radius: 8px;
+}
+
+.date-input-wrapper:focus-within {
+  border-color: var(--accent-cyan);
+}
+
+.date-input-wrapper .date-input {
+  background: none;
+  border: none;
+  padding: 0.75rem 0;
+  flex: 1;
+}
+
+.date-input-wrapper .date-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-secondary {
+  background-color: var(--bg-accent);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
 }
 
 .filter-chip {
@@ -525,9 +669,24 @@ body {
   color: var(--text-muted);
 }
 
-.task-text {
+.task-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-text {
   color: var(--text-primary);
+}
+
+.task-date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  font-weight: 500;
 }
 
 .toggle-btn, .delete-btn {

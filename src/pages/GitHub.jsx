@@ -11,13 +11,13 @@ const GitHub = () => {
     data: user,
     loading: userLoading,
     error: userError
-  } = useFetch(searchQuery ? `https://api.github.com/users/${searchQuery}` : null);
+  } = useFetch(searchQuery ? `https://api.github.com/users/${encodeURIComponent(searchQuery)}` : null);
 
   const {
     data: repos,
     loading: reposLoading,
     error: reposError
-  } = useFetch(searchQuery ? `https://api.github.com/users/${searchQuery}/repos?sort=updated&per_page=6` : null);
+  } = useFetch(searchQuery ? `https://api.github.com/users/${encodeURIComponent(searchQuery)}/repos?sort=updated&per_page=6` : null);
 
   const handleSearch = (username) => {
     setSearchQuery(username);

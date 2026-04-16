@@ -8,7 +8,7 @@ const Dashboard = () => {
       <p className="page-subtitle">Welcome back! Here's what's happening today.</p>
       
       <div className="dashboard-grid">
-        <WeatherWidget city="Kuje, Nigeria" />
+        <WeatherWidget city="Abuja, Nigeria" />
         
         <section className="card stats-card">
           <h3>Activity Summary</h3>
