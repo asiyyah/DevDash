@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import GitHubSearch from '../components/GitHubSearch';
 import UserProfile from '../components/UserProfile';
 import RepoList from '../components/RepoList';
@@ -18,6 +18,12 @@ const GitHub = () => {
     loading: reposLoading,
     error: reposError
   } = useFetch(searchQuery ? `https://api.github.com/users/${encodeURIComponent(searchQuery)}/repos?sort=updated&per_page=6` : null);
+  
+  const optimizedRepos = useMemo(() => {
+    if (!repos) return [];
+    // Sort by stars descending to highlight popular work
+    return [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count);
+  }, [repos]);
 
   const handleSearch = (username) => {
     setSearchQuery(username);
@@ -39,7 +45,7 @@ const GitHub = () => {
       {!loading && !error && (
         <div className="github-results">
           {user && <UserProfile user={user} />}
-          {repos?.length > 0 && <RepoList repos={repos} />}
+          {optimizedRepos.length > 0 && <RepoList repos={optimizedRepos} />}
         </div>
       )}
     </div>
