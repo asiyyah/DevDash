@@ -44,12 +44,17 @@ const useFetch = (url) => {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new Error('Received non-JSON response from server.');
-        }
+        // Some JSON APIs (including wttr.in) incorrectly respond with a
+        // text/plain content type. Parse the payload itself rather than
+        // rejecting otherwise valid JSON based only on the response header.
+        const responseBody = await response.text();
+        let result;
 
-        const result = await response.json();
+        try {
+          result = JSON.parse(responseBody);
+        } catch {
+          throw new Error('Received an invalid JSON response from server.');
+        }
         
         if (active) {
           setData(result);
