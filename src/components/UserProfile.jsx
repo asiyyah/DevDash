@@ -7,7 +7,7 @@ const UserProfile = ({ user }) => {
   return (
     <div className="card user-profile-card fade-in">
       <div className="profile-header">
-        <img src={user.avatar_url} alt={user.login} className="avatar" />
+        <img src={user.avatar_url} alt={`${user.login}'s avatar`} className="avatar" />
         <div className="profile-info">
           <h2 className="user-name">{user.name || user.login}</h2>
           <p className="user-handle">@{user.login}</p>
@@ -27,7 +27,7 @@ const UserProfile = ({ user }) => {
           <div className="meta-item">
             <LinkIcon size={16} />
             <a href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`} target="_blank" rel="noopener noreferrer">
-              Website
+              Visit {user.name || user.login}'s website
             </a>
           </div>
         )}

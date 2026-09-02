@@ -11,8 +11,9 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        <a className="skip-link" href="#main-content">Skip to main content</a>
         <Sidebar />
-        <main className="main-content">
+        <main id="main-content" className="main-content" tabIndex="-1">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/github" element={<GitHub />} />

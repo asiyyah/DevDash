@@ -27,7 +27,9 @@ const GitHubSearch = ({ onSearch }) => {
     <form className="github-search" onSubmit={handleSubmit}>
       <div className="search-input-wrapper">
         <Search size={20} className="search-icon" />
+        <label className="sr-only" htmlFor="github-username">GitHub username</label>
         <input
+          id="github-username"
           type="text"
           className="input"
           placeholder="Search GitHub username..."
@@ -36,8 +38,10 @@ const GitHubSearch = ({ onSearch }) => {
             setUsername(e.target.value);
             if (validationError) setValidationError('');
           }}
+          aria-describedby={validationError ? 'github-username-error' : undefined}
+          aria-invalid={Boolean(validationError)}
         />
-        {validationError && <p className="validation-error">{validationError}</p>}
+        {validationError && <p id="github-username-error" className="validation-error" role="alert">{validationError}</p>}
       </div>
       <button type="submit" className="btn btn-primary">
         Search

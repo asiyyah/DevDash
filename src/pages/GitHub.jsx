@@ -39,8 +39,8 @@ const GitHub = () => {
       
       <GitHubSearch onSearch={handleSearch} />
 
-      {loading && <div className="loading-state">Fetching developer insights...</div>}
-      {error && <div className="error-card card">{error}</div>}
+      {loading && <div className="loading-state" role="status">Fetching developer insights...</div>}
+      {error && <div className="error-card card" role="alert">{error}</div>}
 
       {!loading && !error && (
         <div className="github-results">

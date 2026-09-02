@@ -6,8 +6,8 @@ const WeatherWidget = ({ city = 'Abuja, Nigeria' }) => {
   const encodedCity = encodeURIComponent(city);
   const { data: weather, loading, error } = useFetch(`https://wttr.in/${encodedCity}?format=j1`);
 
-  if (loading) return <div className="card">Loading weather...</div>;
-  if (error) return <div className="card text-rose">Error: {error}</div>;
+  if (loading) return <div className="card" role="status">Loading weather...</div>;
+  if (error) return <div className="card text-rose" role="alert">Error: {error}</div>;
 
   const current = weather?.current_condition?.[0];
   const nearestArea = weather?.nearest_area?.[0];

@@ -19,7 +19,7 @@ const Sidebar = () => {
       <div className="sidebar-header">
         <h2 className="logo-text">DevDash</h2>
       </div>
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav" aria-label="Primary navigation">
         {navItems.map((item) => (
           <NavLink
             key={item.path}
@@ -32,7 +32,7 @@ const Sidebar = () => {
         ))}
       </nav>
       <div className="sidebar-footer">
-        <div className="user-badge">
+        <div className="user-badge" aria-label="Settings are not yet available">
           <Settings size={20} />
           <span>Settings</span>
         </div>

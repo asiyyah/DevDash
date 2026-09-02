@@ -12,7 +12,7 @@ const RepoList = ({ repos }) => {
           <div key={repo.id} className="card repo-card">
             <div className="repo-header">
               <h4 className="repo-name">{repo.name}</h4>
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-link">
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-link" aria-label={`Open ${repo.name} repository in a new tab`}>
                 <ExternalLink size={16} />
               </a>
             </div>
